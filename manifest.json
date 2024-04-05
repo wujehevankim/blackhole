@@ -1,0 +1,42 @@
+{
+    "manifest_version": 3,
+    "name": "BlackHole",
+    "description": "where all your distractions go black and white",
+    "version": "0.0.0.1",
+    "author": "Wujeh Evan Kim & Jade Alexis Martin",
+    "icons": {
+        "16": "/images/icon_16x.png",
+        "48": "/images/icon_48x.png",
+        "128": "/images/icon_128x.png"
+    },
+    "page_action": {
+        "default_icon": {
+            "16": "/images/icon_16x.png",
+            "48": "/images/icon_48x.png",
+            "128": "/images/icon_128x.png"
+        }
+    },
+
+    
+
+    "permissions": ["storage"],
+    "chrome_url_overrides": {
+        "newtab": "index.html"
+    },
+
+
+
+
+    "content_scripts": [
+        {
+            "matches": ["https://www.youtube.com/*", "https://www.tiktok.com/*", "https://www.instagram.com/*", "https://www.facebook.com/*", "https://www.netflix.com/*", "https://www.reddit.com/*"],
+            "css": ["main.css"]
+        }
+
+    ]
+
+
+    
+    
+    
+}
