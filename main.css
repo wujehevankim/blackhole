@@ -1,5 +1,22 @@
-body {
-    filter: grayscale(70);
+/* body {
+    filter: grayscale(80);
+    transform: scaleX(-1); 
+    transform: scaleY(-1);
+    filter: blur(8px);
+} */
+
+body.grayscale {
+    filter: grayscale(80%);
 }
 
+body.horizontal-flip {
+    transform: scaleX(-1);
+}
 
+body.vertical-flip {
+    transform: scaleY(-1);
+}
+
+body.mosaic {
+    filter: blur(8px);
+}

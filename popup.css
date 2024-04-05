@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', 'Segoe UI', Tahoma, Verdana, sans-serif;
+    background-color: #282c34;
+    color: #ffffff;
+}
+
+.main-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-width: 300px; 
+    max-width: 400px; 
+    min-height: 400px;
+    max-height: 550px;
+    background-color: #20232a; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+}
+
+/* Header styling */
+.head {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+.head img {
+    height: 48px;
+    width: 48px;
+    margin-right: 15px;
+}
+.head h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+
+/* Domain list styling */
+.domains-list-container {
+    padding-bottom: 10px;
+}
+#domainsList {
+    padding: 10px;
+    margin: 20px 20px 0 20px;
+    background-color: #30363d;
+    border-radius: 8px;
+    max-height: 150px;
+    overflow: auto; 
+    column-count: 2; 
+    column-gap: 20px; 
+    column-fill: auto; 
+}
+
+/* Style adjustments for individual domain items */
+.domain-item {
+    break-inside: avoid-column; 
+    margin-bottom: 10px;
+    padding: 5px; 
+    background-color: #393f47; 
+    border-radius: 5px; 
+    color: #fff; 
+    display: block; 
+}
+
+/* Button styling */
+button {
+    width: auto;
+    padding: 8px;
+    margin: 10px 0;
+    background-color: #61dafb;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+button:hover {
+    background-color: #4f98c1;
+}
+
+/* Control block styling */
+.control-block {
+    width: 100%;
+    text-align: center;
+}
+
+.control-block h3 {
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #61dafb;
+}
+
+input[type="text"] {
+    width: calc(100% - 60px); /* Adjusts based on padding */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #61dafb;
+    border-radius: 5px;
+    color: #000000;
+}
+
+input[type="text"]::placeholder {
+    color: #a0a0a0;
+}
+
+
+
+
+
+/* Style the toggle container */
+.effect-selection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.toggle-1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.toggle-2 {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+}
+.effect-selection label{
+    font-size: 14px;
+    padding-left: 4px;
+}
+
+.toggle-container {
+    display: flex;
+    /* align-items: center; */
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+/* Hide the checkbox */
+.effect-toggle {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Create a custom toggle switch */
+.toggle-label {
+    position: relative;
+    display: block;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 24px;
+    text-indent: 40px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.toggle-label:before, .toggle-label:after {
+    content: "";
+    position: absolute;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* The box */
+.toggle-label:before {
+    left: 0;
+    top: 50%;
+    width: 34px;
+    height: 14px;
+    margin-top: -7px;
+    background-color: #ccc;
+    border-radius: 15px;
+    transition: background-color 0.2s ease;
+}
+
+/* The knob */
+.toggle-label:after {
+    top: 50%;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: left 0.2s ease;
+}
+
+/* Toggle on styles */
+.effect-toggle:checked + .toggle-label:before {
+    background-color: #61dafb;
+}
+
+.effect-toggle:checked + .toggle-label:after {
+    left: 16px;
+}

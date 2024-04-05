@@ -1,42 +1,38 @@
 {
     "manifest_version": 3,
-    "name": "BlackHole",
-    "description": "where all your distractions go black and white",
-    "version": "0.0.0.1",
-    "author": "Wujeh Evan Kim & Jade Alexis Martin",
-    "icons": {
-        "16": "/images/icon_16x.png",
-        "48": "/images/icon_48x.png",
-        "128": "/images/icon_128x.png"
+    "name": "Blackhole",
+    "version": "1.0",
+    "permissions": [
+      "activeTab",
+      "storage",
+      "scripting",
+      "<all_urls>"
+    ],
+    "background": {
+      "service_worker": "background.js"
     },
-    "page_action": {
-        "default_icon": {
-            "16": "/images/icon_16x.png",
-            "48": "/images/icon_48x.png",
-            "128": "/images/icon_128x.png"
-        }
-    },
-
-    
-
-    "permissions": ["storage"],
-    "chrome_url_overrides": {
-        "newtab": "index.html"
-    },
-
-
-
-
     "content_scripts": [
-        {
-            "matches": ["https://www.youtube.com/*", "https://www.tiktok.com/*", "https://www.instagram.com/*", "https://www.facebook.com/*", "https://www.netflix.com/*", "https://www.reddit.com/*"],
-            "css": ["main.css"]
-        }
-
-    ]
-
-
-    
-    
-    
-}
+      {
+        "matches": ["<all_urls>"],
+        "css": ["main.css"],
+        "js": ["content.js"],
+        "run_at": "document_idle"
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "/images/icon_16.png"
+    },
+    "web_accessible_resources": [
+      {
+        "resources": ["main.css"],
+        "matches": ["<all_urls>"]
+      }
+    ],
+    "icons": {
+      "16": "/images/icon_16.png",
+      "48": "/images/icon_48.png",
+      "128": "/images/icon_128.png"
+    }
+  }
+  

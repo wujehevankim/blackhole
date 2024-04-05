@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="popup.css">
+    <meta charset="UTF-8">
+    <title>Blackhole</title>
+    <script src="popup.js" defer></script>
+</head>
+<body>
+    <div class="main-body">
+        <div class="head">
+            <img src="/images/icon_48.png" alt="Blackhole Icon">
+            <h1>Blackhole</h1>
+        </div>
+        <div class="domains-list-container">
+            <div id="domainsList"></div>
+        </div>
+        <button id="remove">Back to distraction</button>
+        <div class="control-block">
+            <h3>Add website below</h3>
+            <input type="text" id="domain" placeholder="Type link here">
+            <button id="add">Stay away!</button>
+        </div>
+        <h3>Choose Effects</h3>
+        <div class="effect-selection">
+                <div class="toggle-1">
+                    <p> Filter: </p>
+                    <div class="toggle-container">
+                        <input type="checkbox" id="grayscale" class="effect-toggle" value="grayscale">
+                        <label for="grayscale" class="toggle-label">Grayscale</label>
+                    </div>
+                    <div class="toggle-container">
+                        <input type="checkbox" id="mosaic" class="effect-toggle" value="mosaic">
+                        <label for="mosaic" class="toggle-label">Mosaic</label>
+                    </div>
+                </div class="toggle-2">
+                <div>
+                    <p> Flip Screen: </p>
+                    <div class="toggle-container">
+                        <input type="checkbox" id="vertical-flip" class="effect-toggle" value="vertical-flip">
+                        <label for="vertical-flip" class="toggle-label">Vertical Flip</label>
+                    </div>
+                    <div class="toggle-container">
+                        <input type="checkbox" id="horizontal-flip" class="effect-toggle" value="horizontal-flip">
+                        <label for="horizontal-flip" class="toggle-label">Horizontal Flip</label>
+                    </div>
+                </div>
+        </div>
+    </div>
+</body>
+</html>

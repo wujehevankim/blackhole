@@ -1,9 +1,0 @@
-- blur certain parts of the website
-
-- fuck with cursor
-    - cursor invisible (when you start moving, it's invisible for 5 seconds)
-    - cursor moves too much
-
-- if you actually spend 30 minutes on youtube.com, the page refreshes to google scholars
-
-- toggle (new websites)
