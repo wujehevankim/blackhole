@@ -99,6 +99,9 @@ button:hover {
 .control-block {
     width: 100%;
     text-align: center;
+    display: flex; /* Use flexbox layout */
+    justify-content: center; /* Center the items horizontally */
+    align-items: center; /* Center the items vertically */
 }
 
 .control-block h3 {
@@ -106,6 +109,54 @@ button:hover {
     font-size: 18px;
     color: #61dafb;
 }
+
+
+input#domain {
+    width: calc(75% - 60px);
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-right: 15px;
+    border: none;
+    background-color: transparent;
+    color: #ffffff;
+    /* Add bottom border */
+    border-bottom: 1px solid #a0a0a0;
+    border-radius: 0px;
+    font-size: 12px;
+}
+
+input#domain:focus{
+    color: #ffffff;
+    border-bottom: 1px solid #a0a0a0;
+
+}
+
+input#domain::placeholder {
+    color: #a0a0a0;
+}
+
+
+
+
+
+
+button#add {
+    width: auto;
+    padding: 8px;
+    margin: 10px 0;
+    background-color: transparent; /* No background color */
+    color: #61dafb; /* Blue text color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-bottom: 17px;
+}
+
+
+
+
 
 input[type="text"] {
     width: calc(100% - 60px); /* Adjusts based on padding */
