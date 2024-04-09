@@ -1,12 +1,15 @@
 {
     "manifest_version": 3,
     "name": "Blackhole",
-    "version": "1.0",
+    "description": "Make your distractions go away!",
+    "version": "1.0.0",
+    "author": "Evan Kim & Justin Yang",
     "permissions": [
       "activeTab",
       "storage",
       "scripting",
-      "<all_urls>"
+      "<all_urls>",
+      "tabs"
     ],
     "background": {
       "service_worker": "background.js"

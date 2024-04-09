@@ -60,18 +60,22 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Function to save selected effects
+    // 2024.04.09 - EVAN - slightly changed here so change applies to all tabs!
     function saveSelectedEffects() {
         const effects = {};
         effectCheckboxes.forEach(checkbox => {
             effects[checkbox.id] = checkbox.checked; // Use checkbox ID as the key
         });
         chrome.storage.local.set({ effects }, () => {
-            // Optionally, send a message to content scripts to apply effects immediately
-            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                chrome.tabs.sendMessage(tabs[0].id, {action: "updateEffects"});
+            // Send a message to content scripts in all tabs to apply effects immediately
+            chrome.tabs.query({}, function(tabs) { // Removed filtering to target all tabs
+                tabs.forEach(tab => {
+                    chrome.tabs.sendMessage(tab.id, {action: "updateEffects"});
+                });
             });
         });
     }
+    
 
     // Function to load and apply effect preferences
     function loadEffectPreferences() {
@@ -90,4 +94,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the display of stored domains and effect preferences on DOM load
     updateListDisplay();
     loadEffectPreferences();
+
+
+    // Add the current year to the copyright span
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Add click event listeners to the names in CopyRight
+    document.getElementById('evan-kim').addEventListener('click', () => {
+        window.open('https://www.linkedin.com/in/wujehevankim/', '_blank');
+    });
+
+    document.getElementById('justin-yang').addEventListener('click', () => {
+        window.open('https://www.linkedin.com/in/juyoung-yang/', '_blank');
+    });
 });
