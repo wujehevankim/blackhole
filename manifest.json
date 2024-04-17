@@ -4,16 +4,12 @@
     "description": "Make your distractions go away!",
     "version": "1.0.0",
     "author": "Evan Kim & Justin Yang",
-    "permissions": [
-      "activeTab",
-      "storage",
-      "scripting",
-      "<all_urls>",
-      "tabs"
-    ],
     "background": {
       "service_worker": "background.js"
     },
+    "permissions": [
+      "tabs", "storage", "webNavigation", "<all_urls>"
+    ],  
     "content_scripts": [
       {
         "matches": ["<all_urls>"],
