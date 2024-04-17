@@ -8,13 +8,12 @@
       "service_worker": "background.js"
     },
     "permissions": [
-      "tabs", "storage", "webNavigation", "<all_urls>"
+      "tabs", "storage", "webNavigation", "scripting", "activeTab", "<all_urls>"
     ],  
     "content_scripts": [
       {
         "matches": ["<all_urls>"],
         "css": ["main.css"],
-        "js": ["content.js"],
         "run_at": "document_idle"
       }
     ],
