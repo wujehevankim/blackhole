@@ -144,7 +144,14 @@ input#domain:focus{
 
 input#domain::placeholder {
     color: #a0a0a0;
+    font-size: 11px;
 }
+
+input#domain:focus-visible {
+    outline: none; /* Removes the outline */
+    border-radius: 0; /* Removes any border radius */
+}
+
 
 
 

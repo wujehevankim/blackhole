@@ -243,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     
     
-    
+    /*
     const effectToggles = document.querySelectorAll('.effect-toggle');
     chrome.storage.local.get(['domains', 'toggleStates'], function (result) {
         if (result.domains) {
@@ -295,6 +295,81 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+    
+    
+    */
+
+
+
+
+
+
+    // ONLY ALLOWING ONE TOGGLE AT A TIME
+    const effectToggles = document.querySelectorAll('.effect-toggle');
+    chrome.storage.local.get(['domains', 'toggleStates'], function (result) {
+        if (result.domains) {
+            displayDomains(result.domains);
+        }
+        if (result.toggleStates) {
+            updateToggleStates(result.toggleStates);
+        }
+    });
+
+    // Set up listeners for each toggle and initialize their state
+    effectToggles.forEach(toggle => {
+        toggle.addEventListener('change', function () {
+            if (this.checked) {
+                // Uncheck all other toggles
+                effectToggles.forEach(t => {
+                    if (t.id !== this.id) {
+                        t.checked = false;
+                    }
+                });
+            }
+            // Update states after changes
+            updateAndStoreToggleStates();
+        });
+    });
+
+    function updateAndStoreToggleStates() {
+        const updatedStates = {};
+        effectToggles.forEach(t => {
+            updatedStates[t.id] = t.checked;
+        });
+        storeToggleStates(updatedStates);
+        logToggleStates();
+    }
+
+    function updateToggleStates(toggleStates) {
+        for (const [key, value] of Object.entries(toggleStates)) {
+            const toggle = document.getElementById(key);
+            if (toggle) {
+                toggle.checked = value;
+            }
+        }
+    }
+
+    function storeToggleStates(toggleStates) {
+        chrome.storage.local.set({ toggleStates: toggleStates }, function () {
+            if (chrome.runtime.lastError) {
+                console.error('Error saving toggle states:', chrome.runtime.lastError);
+            } else {
+                console.log('Toggle states successfully saved:', toggleStates);
+            }
+        });
+    }
+
+    function logToggleStates() {
+        chrome.storage.local.get('toggleStates', function (result) {
+            if (result.toggleStates) {
+                console.log('Current toggle states:');
+                for (const [key, value] of Object.entries(result.toggleStates)) {
+                    console.log(`${key}: ${value ? 'ON' : 'OFF'}`);
+                }
+            }
+        });
+    }
+    
 
     
 

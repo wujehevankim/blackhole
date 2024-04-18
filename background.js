@@ -26,7 +26,7 @@ setDefaultToggleStates();
 
 
 
-
+// FOR RELOADING, REFRESHING, OR OPENING UP A NEW TAB
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     // Ensures the tab's URL is fully loaded
     //console.log("Tab updated:", tabId, changeInfo, tab);
@@ -36,6 +36,42 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
         checkDomainAndApplyStyles(tab.url);
     }
 });
+
+
+// FOR NAVIGATING TO AN EXISTING TAB (AKA "SWITCHING TABS")
+chrome.tabs.onActivated.addListener(function(activeInfo) {
+    // Use the tabId with the activeInfo object to get the tab object
+    chrome.tabs.get(activeInfo.tabId, function(tab) {
+        if (!chrome.runtime.lastError && tab.url && tab.status === 'complete') {
+            console.log('Tab activated:', tab);
+            checkDomainAndApplyStyles(tab.url);
+        } else if (chrome.runtime.lastError) {
+            console.error('Error retrieving tab information:', chrome.runtime.lastError);
+        }
+    });
+});
+
+
+// FOR MAKING THE TOGGLE EFFECT HAPPEN ~ON~ THE TAB I AM CURRENTLY ON
+// Listener for changes in chrome storage (for example, when toggle states change)
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+    for (let key in changes) {
+        let storageChange = changes[key];
+        console.log('Storage key "%s" in namespace "%s" changed. ' +
+                    'Old value was "%s", new value is "%s".',
+                    key, namespace, storageChange.oldValue, storageChange.newValue);
+    }
+
+    // Apply styles immediately to the currently active tab
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        if (tabs[0] && tabs[0].url) {
+            checkDomainAndApplyStyles(tabs[0].url);
+        }
+    });
+});
+
+
+
 
 function checkDomainAndApplyStyles(url) {
     try {
@@ -84,17 +120,20 @@ function applyStylesToTab(domain, toggleStates) {
         cssStyles += 'body { filter: grayscale(100%); }';
         console.log('Applied grayscale filter.');
     }
-    if (toggleStates.mosaic) {
-        cssStyles += 'body { filter: blur(10px); }';
+    else if (toggleStates.mosaic) {
+        cssStyles += 'body { filter: blur(3px); }';
         console.log('Applied mosaic blur.');
     }
-    if (toggleStates.verticalFlip) {
+    else if (toggleStates.verticalFlip) {
         cssStyles += 'body { transform: scaleY(-1); }';
         console.log('Applied vertical flip.');
     }
-    if (toggleStates.horizontalFlip) {
+    else if (toggleStates.horizontalFlip) {
         cssStyles += 'body { transform: scaleX(-1); }';
         console.log('Applied horizontal flip.');
+    }
+    else {
+        //nothing
     }
 
     // Check if any styles were generated
