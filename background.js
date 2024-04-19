@@ -121,7 +121,7 @@ function applyStylesToTab(domain, toggleStates) {
         console.log('Applied grayscale filter.');
     }
     else if (toggleStates.mosaic) {
-        cssStyles += 'body { filter: blur(1px); }';
+        cssStyles += 'body { filter: blur(10px); }';
         console.log('Applied mosaic blur.');
     }
     else if (toggleStates.verticalFlip) {
