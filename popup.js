@@ -32,10 +32,12 @@ document.addEventListener('DOMContentLoaded', function () {
     // Retrieves stored domains from local storage when the popup loads
     chrome.storage.local.get(['domains'], function (result) {
         if (result.domains) {
-            // If stored domains exist, display them using the displayDomains function
             displayDomains(result.domains);
+        } else {
+            displayDomains([]); // Pass an empty array if no domains are found
         }
     });
+    
 
 
 
@@ -170,36 +172,44 @@ document.addEventListener('DOMContentLoaded', function () {
         // Clears the current contents of the domains display div
         domainsListDiv.innerHTML = ''; 
         // Loops through each domain in the list
-        domains.forEach(function (domain) {
-            // Creates a new div element for each domain
-            const domainDiv = document.createElement('div');
-            domainDiv.className = 'domain-item'; // Apply the CSS class for styling
-            domainDiv.textContent = domain;
-            domainDiv.title = domain; // Set title for tooltip on hover
-            domainDiv.style.marginLeft = '10px';
-            domainDiv.style.marginBottom = '0px';
-            
-            // adding ellipsis when it's too long
-            let displayText = domain.length > 15 ? domain.substring(0, 15) + '...' : domain;
-            domainDiv.textContent = displayText;
-            
-    
-            // Creates a new button element for removing the domain
-            const removeBtn = document.createElement('button');
-            removeBtn.textContent = 'x';
-            removeBtn.style.marginRight = '20px'; // Keep the margin for spacing the button, if needed
-            removeBtn.style.marginBottom = '13px';
-            removeBtn.style.cursor = 'pointer';
-            removeBtn.onclick = function () {
-                removeDomain(domain);
-            };
-    
-            // Append the remove button to the domainDiv
-            domainDiv.appendChild(removeBtn);
-    
-            // Append the domainDiv to the domains list container
-            domainsListDiv.appendChild(domainDiv);
-        });
+        if (domains.length === 0){
+            domainsListDiv.innerHTML = "<div style='padding: 20px 0; color: #ccc; text-align: center;'>What websites are distracting you?</div>";
+        }
+        else{
+            domains.forEach(function (domain) {
+                // Creates a new div element for each domain
+                const domainDiv = document.createElement('div');
+                domainDiv.className = 'domain-item'; // Apply the CSS class for styling
+                domainDiv.textContent = domain;
+                domainDiv.title = domain; // Set title for tooltip on hover
+                domainDiv.style.marginLeft = '10px';
+                domainDiv.style.marginBottom = '0px';
+                domainDiv.style.color = '#ccc';
+                
+                // adding ellipsis when it's too long
+                let displayText = domain.length > 15 ? domain.substring(0, 15) + '...' : domain;
+                domainDiv.textContent = displayText;
+                
+        
+                // Creates a new button element for removing the domain
+                const removeBtn = document.createElement('button');
+                //removeBtn.textContent = 'x';
+                removeBtn.innerHTML = '&#x2715;'; // Multiplication sign
+                removeBtn.style.fontSize = '12px';
+                removeBtn.style.marginRight = '20px'; // Keep the margin for spacing the button, if needed
+                removeBtn.style.marginBottom = '10px';
+                removeBtn.style.cursor = 'pointer';
+                removeBtn.onclick = function () {
+                    removeDomain(domain);
+                };
+        
+                // Append the remove button to the domainDiv
+                domainDiv.appendChild(removeBtn);
+        
+                // Append the domainDiv to the domains list container
+                domainsListDiv.appendChild(domainDiv);
+            });
+        }
     }
     
 
@@ -369,7 +379,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-    
+
+
+
+    //FOR SHOWING YEAR IN THE BOTTOM COPYRIGHT
+    const currentYearSpan = document.getElementById('current-year');
+    const currentYear = new Date().getFullYear(); // Get the current year
+    currentYearSpan.textContent = currentYear;
 
     
 
